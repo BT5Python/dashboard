@@ -3,394 +3,403 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistem Administrasi Surat</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>COMMAND CENTER - Administrasi Surat</title>
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 :root{
---bg:#f1f5f9;
---sidebar:#0f172a;
---card:#ffffff;
---primary:#2563eb;
---text:#1e293b;
---muted:#64748b;
---border:#e2e8f0;
+    --bg:#050816;
+    --panel:#0b1220;
+    --border:#163052;
+    --cyan:#00e5ff;
+    --cyan2:#00bfff;
+    --text:#dffcff;
 }
 
 body{
-background:var(--bg);
-display:flex;
-height:100vh;
-overflow:hidden;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    height:100vh;
+    overflow:hidden;
 }
 
-/* SIDEBAR */
+/* Background Grid */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    linear-gradient(rgba(0,229,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,.05) 1px, transparent 1px);
+    background-size:40px 40px;
+    animation:gridMove 20s linear infinite;
+    pointer-events:none;
+}
 
+@keyframes gridMove{
+    from{transform:translateY(0);}
+    to{transform:translateY(40px);}
+}
+
+/* Layout */
+.container{
+    display:flex;
+    height:100vh;
+}
+
+/* Sidebar */
 .sidebar{
-width:260px;
-background:var(--sidebar);
-color:white;
-padding:20px;
-display:flex;
-flex-direction:column;
+    width:85px;
+    background:rgba(8,16,32,.95);
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:15px 0;
+    z-index:10;
 }
 
 .logo{
-margin-bottom:30px;
-}
-
-.logo h2{
-font-size:22px;
-font-weight:700;
-}
-
-.logo p{
-font-size:13px;
-color:#94a3b8;
-margin-top:4px;
+    width:55px;
+    height:55px;
+    border:1px solid var(--cyan);
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+    box-shadow:0 0 15px rgba(0,229,255,.5);
 }
 
 .menu{
-flex:1;
+    margin-top:30px;
+    width:100%;
 }
 
-.menu a{
-display:flex;
-align-items:center;
-gap:12px;
-padding:14px;
-margin-bottom:8px;
-text-decoration:none;
-color:#cbd5e1;
-border-radius:10px;
-transition:.2s;
+.menu button{
+    width:100%;
+    height:60px;
+    background:none;
+    border:none;
+    color:var(--cyan);
+    font-size:22px;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.menu a:hover{
-background:#1e293b;
-color:white;
+.menu button:hover{
+    background:rgba(0,229,255,.08);
+    box-shadow:inset 3px 0 var(--cyan);
 }
 
-.menu a.active{
-background:var(--primary);
-color:white;
-}
-
-.profile{
-padding-top:20px;
-border-top:1px solid rgba(255,255,255,.1);
-}
-
-.profile h4{
-font-size:14px;
-}
-
-.profile p{
-font-size:12px;
-color:#94a3b8;
-}
-
-/* CONTENT */
-
+/* Main */
 .main{
-flex:1;
-padding:25px;
-overflow:auto;
+    flex:1;
+    padding:20px;
+    overflow:auto;
 }
 
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
+/* Header */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
 }
 
-.topbar h1{
-font-size:28px;
-color:var(--text);
+.title{
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:2px;
+    color:var(--cyan);
+    text-shadow:0 0 10px var(--cyan);
 }
 
-.topbar button{
-background:var(--primary);
-border:none;
-color:white;
-padding:12px 18px;
-border-radius:10px;
-cursor:pointer;
-font-weight:600;
+.clock{
+    text-align:right;
 }
 
-/* CARDS */
+.time{
+    font-size:32px;
+    font-weight:bold;
+    color:var(--cyan);
+}
 
+.date{
+    color:#8cc9d3;
+}
+
+/* Cards */
 .cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-margin-bottom:25px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+    margin-bottom:20px;
 }
 
 .card{
-background:var(--card);
-padding:20px;
-border-radius:16px;
-box-shadow:0 4px 12px rgba(0,0,0,.05);
+    background:rgba(11,18,32,.8);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    backdrop-filter:blur(10px);
+    transition:.3s;
 }
 
-.card p{
-color:var(--muted);
-font-size:14px;
-margin-bottom:10px;
+.card:hover{
+    transform:translateY(-5px);
+    border-color:var(--cyan);
+    box-shadow:0 0 25px rgba(0,229,255,.25);
 }
 
-.card h2{
-font-size:32px;
-color:var(--text);
+.card h4{
+    color:#7fb5c5;
+    margin-bottom:10px;
 }
 
-/* GRID */
-
-.grid{
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:20px;
+.card .value{
+    font-size:36px;
+    font-weight:bold;
+    color:var(--cyan);
 }
 
+/* Quick Action */
 .panel{
-background:white;
-padding:20px;
-border-radius:16px;
-box-shadow:0 4px 12px rgba(0,0,0,.05);
+    background:rgba(11,18,32,.8);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:20px;
 }
 
-.panel h3{
-margin-bottom:20px;
-color:var(--text);
+.panel-title{
+    color:var(--cyan);
+    font-weight:bold;
+    margin-bottom:15px;
+    letter-spacing:1px;
 }
 
-/* TABLE */
-
-table{
-width:100%;
-border-collapse:collapse;
+.actions{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
 }
 
-th{
-text-align:left;
-padding:12px;
-background:#f8fafc;
-color:#475569;
-font-size:14px;
+.action-btn{
+    padding:18px;
+    border-radius:14px;
+    border:1px solid var(--border);
+    background:#09111f;
+    color:var(--text);
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
 }
 
-td{
-padding:12px;
-border-top:1px solid #e2e8f0;
-font-size:14px;
+.action-btn:hover{
+    border-color:var(--cyan);
+    box-shadow:0 0 20px rgba(0,229,255,.3);
 }
 
-.badge{
-padding:5px 10px;
-border-radius:20px;
-font-size:12px;
-font-weight:600;
+/* Activity */
+.activity{
+    display:grid;
+    gap:10px;
 }
 
-.cuti{
-background:#dbeafe;
-color:#1d4ed8;
+.log{
+    padding:12px;
+    border-left:3px solid var(--cyan);
+    background:#09111f;
+    border-radius:8px;
 }
 
-.izin{
-background:#dcfce7;
-color:#15803d;
+.status{
+    color:#00ff88;
 }
 
-.perintah{
-background:#fef3c7;
-color:#b45309;
+/* Footer */
+.footer{
+    margin-top:20px;
+    text-align:center;
+    color:#5f8391;
+    font-size:12px;
 }
-
-/* ACTIVITY */
-
-.activity-item{
-padding:12px 0;
-border-bottom:1px solid #e2e8f0;
-}
-
-.activity-item:last-child{
-border-bottom:none;
-}
-
-.activity-item strong{
-display:block;
-color:var(--text);
-}
-
-.activity-item span{
-font-size:13px;
-color:var(--muted);
-}
-
-@media(max-width:1000px){
-
-.sidebar{
-display:none;
-}
-
-.grid{
-grid-template-columns:1fr;
-}
-
-}
-
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
+<div class="container">
 
-<div class="sidebar">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
 
-<div class="logo">
-<h2>📄 ADMIN SURAT</h2>
-<p>Versi 1.0</p>
-</div>
+        <div class="logo">⚡</div>
 
-<div class="menu">
-<a href="#" class="active">🏠 Dashboard</a>
-<a href="#">👥 DATA PERSONEL</a>
-<a href="#">📝 KENAIKAN PANGKAT</a>
-<a href="#">📋 MUTASI</a>
-<a href="#">📋 KGB</a>
-<a href="#">📑 Surat Perintah</a>
-<a href="#">📚 Arsip Surat</a>
-<a href="#">⚙ Pengaturan</a>
-</div>
+        <div class="menu">
+            <button title="Dashboard">🏠</button>
+            <button title="Personel">👥</button>
+            <button title="Surat Cuti">📝</button>
+            <button title="Surat Izin">📋</button>
+            <button title="Surat Perintah">📄</button>
+            <button title="Arsip">📚</button>
+            <button onclick="toggleFullscreen()" title="Fullscreen">🖥️</button>
+        </div>
 
-<div class="profile">
-<h4>Operator</h4>
-<p>Administrator</p>
-</div>
+    </div>
 
-</div>
+    <!-- MAIN -->
+    <div class="main">
 
-<!-- CONTENT -->
+        <div class="header">
 
-<div class="main">
+            <div>
+                <div class="title">
+                    COMMAND CENTER
+                </div>
+                <div style="color:#88b7c4">
+                    Sistem Administrasi Surat
+                </div>
+            </div>
 
-<div class="topbar">
-<div>
-<h1>Dashboard</h1>
-<p style="color:#64748b">
-Sistem Administrasi Surat
-</p>
-</div>
+            <div class="clock">
+                <div class="time" id="time"></div>
+                <div class="date" id="date"></div>
+                <div class="status">● ONLINE</div>
+            </div>
 
-<button>+ Buat Surat</button>
-</div>
+        </div>
 
-<div class="cards">
+        <!-- STATS -->
+        <div class="cards">
 
-<div class="card">
-<p>Total Personel</p>
-<h2>245</h2>
-</div>
+            <div class="card">
+                <h4>PERSONEL</h4>
+                <div class="value">245</div>
+            </div>
 
-<div class="card">
-<p>Surat Hari Ini</p>
-<h2>12</h2>
-</div>
+            <div class="card">
+                <h4>SURAT HARI INI</h4>
+                <div class="value">12</div>
+            </div>
 
-<div class="card">
-<p>Surat Bulan Ini</p>
-<h2>156</h2>
-</div>
+            <div class="card">
+                <h4>SURAT BULAN INI</h4>
+                <div class="value">156</div>
+            </div>
 
-<div class="card">
-<p>Arsip PDF</p>
-<h2>1.234</h2>
-</div>
+            <div class="card">
+                <h4>ARSIP PDF</h4>
+                <div class="value">1.234</div>
+            </div>
 
-</div>
+        </div>
 
-<div class="grid">
+        <!-- QUICK ACTION -->
+        <div class="panel">
 
-<div class="panel">
+            <div class="panel-title">
+                QUICK ACTION
+            </div>
 
-<h3>Riwayat Surat Terbaru</h3>
+            <div class="actions">
 
-<table>
+                <button class="action-btn">
+                    ➕ BUAT SURAT CUTI
+                </button>
 
-<tr>
-<th>No Surat</th>
-<th>Jenis</th>
-<th>Nama</th>
-<th>Tanggal</th>
-</tr>
+                <button class="action-btn">
+                    ➕ BUAT SURAT IZIN
+                </button>
 
-<tr>
-<td>CT-001/VI/2026</td>
-<td><span class="badge cuti">CUTI</span></td>
-<td>Andi</td>
-<td>17/06/2026</td>
-</tr>
+                <button class="action-btn">
+                    ➕ BUAT SURAT PERINTAH
+                </button>
 
-<tr>
-<td>IZ-010/VI/2026</td>
-<td><span class="badge izin">IZIN</span></td>
-<td>Budi</td>
-<td>17/06/2026</td>
-</tr>
+                <button class="action-btn">
+                    📁 BUKA ARSIP SURAT
+                </button>
 
-<tr>
-<td>SP-008/VI/2026</td>
-<td><span class="badge perintah">PERINTAH</span></td>
-<td>Dedi</td>
-<td>16/06/2026</td>
-</tr>
+            </div>
 
-</table>
+        </div>
 
-</div>
+        <!-- ACTIVITY -->
+        <div class="panel">
 
-<div class="panel">
+            <div class="panel-title">
+                AKTIVITAS TERBARU
+            </div>
 
-<h3>Aktivitas</h3>
+            <div class="activity">
 
-<div class="activity-item">
-<strong>Surat Cuti Dibuat</strong>
-<span>5 menit lalu</span>
-</div>
+                <div class="log">
+                    CT-001 dibuat oleh Operator
+                </div>
 
-<div class="activity-item">
-<strong>Surat Izin Disetujui</strong>
-<span>20 menit lalu</span>
-</div>
+                <div class="log">
+                    IZ-010 dicetak ke PDF
+                </div>
 
-<div class="activity-item">
-<strong>Data Personel Ditambahkan</strong>
-<span>1 jam lalu</span>
-</div>
+                <div class="log">
+                    SP-005 disetujui
+                </div>
 
-<div class="activity-item">
-<strong>Arsip PDF Disimpan</strong>
-<span>2 jam lalu</span>
-</div>
+                <div class="log">
+                    Data personel diperbarui
+                </div>
 
-</div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            COMMAND CENTER v1.0
+        </div>
+
+    </div>
 
 </div>
 
-</div>
+<script>
+
+function updateClock(){
+
+    const now = new Date();
+
+    document.getElementById('time').innerHTML =
+        now.toLocaleTimeString('id-ID');
+
+    document.getElementById('date').innerHTML =
+        now.toLocaleDateString('id-ID',{
+            weekday:'long',
+            year:'numeric',
+            month:'long',
+            day:'numeric'
+        });
+
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+function toggleFullscreen(){
+
+    if(!document.fullscreenElement){
+        document.documentElement.requestFullscreen();
+    }else{
+        document.exitFullscreen();
+    }
+
+}
+
+</script>
 
 </body>
 </html>
