@@ -245,23 +245,5 @@ function tutupInfo() {
     document.getElementById("infoBox").style.display = "none";
 }
 </script>
-<script>
-const text = `Karang Taruna adalah organisasi kepemudaan nonpartisan di Indonesia yang dibentuk oleh masyarakat
-sebagai wadah pengembangan generasi muda. Organisasi ini tumbuh berdasarkan kesadaran dan tanggung jawab sosial dari, 
-oleh, dan untuk masyarakat, khususnya generasi muda di wilayah desa, kelurahan, atau komunitas sosial sederajat`;
-let index = 0;
-
-function ketik() {
-    if (index < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(index);
-        index++;
-        setTimeout(ketik, 50);
-    } else {
-        document.getElementById("okButton").style.display = "inline-block";
-    }
-}
-
-ketik();
-</script>
 </body>
 </html>
