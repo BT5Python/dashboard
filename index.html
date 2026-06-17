@@ -3,140 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E-Office</title>
+<title>WARMIE</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background:#000;
-    color:#fff;
+body {
+    background-color: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
 }
 
-.header{
-    height:60px;
-    background:#111;
-    border-bottom:1px solid #333;
-    display:flex;
-    align-items:center;
-    padding:0 20px;
-    font-size:20px;
-    font-weight:bold;
+/* HEADER */
+header {
+    background-color: #000000;
+    padding: 30px;
+    border-bottom: 1px solid #333;
+    text-align: right;
 }
 
-.sidebar{
-    width:250px;
-    height:calc(100vh - 60px);
-    background:#0a0a0a;
-    border-right:1px solid #222;
-    padding:10px;
+.judul {
+    font-family: "Courier New", monospace;
+    font-size: 40px;
+    color: #F5B027;
+    margin: 0;
 }
 
-.menu-item{
-    margin-bottom:8px;
+.subjudul {
+    font-family: "Courier New", monospace;
+    font-size: 40px;
+    color: #F5B027;
+    margin: 0;
 }
 
-.menu-btn{
-    width:100%;
-    background:#111;
-    color:#fff;
-    border:none;
-    padding:12px;
-    text-align:left;
-    cursor:pointer;
-    border-radius:4px;
+/* ISI HALAMAN */
+main {
+    height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.menu-btn:hover{
-    background:#1b1b1b;
+/* KOTAK DROPDOWN */
+.dropdown-box {
+    background-color: #111;
+    border: 2px solid #00ff00;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;    
+    margin-top: 80px;    
 }
 
-.submenu{
-    display:none;
-    margin-top:5px;
-    margin-left:15px;
+.dropdown-box h2 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-family: "Courier New", monospace;
 }
 
-.submenu a{
-    display:block;
-    padding:10px;
-    text-decoration:none;
-    color:#ccc;
+select {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: "Courier New", monospace;
+    background-color: #111;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.submenu a:hover{
-    color:#00ff00;
+select:focus {
+    outline: none;
+    border-color: #ffd700;
+}
+.footer-section {
+    width: 500px;
+    margin-top: 50px;
+    text-align: center;
 }
 
-.container{
-    display:flex;
+.footer-section hr {
+    border: none;
+    border-top: 1px solid #555;
+    margin-bottom: 15px;
 }
 
-.content{
-    flex:1;
-    padding:20px;
+.footer-section p {
+    color: #888;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* 50% transparan gelap */
+    background: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
 }
 
+/* KOTAK DI TENGAH */
+.overlay-box {
+    width: 600px;
+    height: 500px;
+    max-width: 90%;
+    padding: 40px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #00ff00;
+    border-radius: 10px;
+
+    text-align: center;
+    font-family: "Courier New", monospace;
+}
+
+.overlay-box h2 {
+    color: #ffd700;
+    margin-bottom: 15px;
+}
+
+.overlay-box p {
+    color: #fff;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.overlay-box button {
+    padding: 10px 25px;
+    background: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.overlay-box button:hover {
+    background: #00bfff;
+}
+.blink {
+    color: red;
+    animation: kedip 0.5s infinite;
+}
+
+@keyframes kedip {
+    0% {
+        color: red;
+        opacity: 1;
+    }
+
+    50% {
+        color: #ff6666;
+        opacity: 0.3;
+    }
+
+    100% {
+        color: red;
+        opacity: 1;
+    }
+}
+#typing::after {
+    content: "|";
+    color: #00ff00;
+    animation: cursor 0.7s infinite;
+}
+
+@keyframes cursor {
+    50% {
+        opacity: 0;
+    }
+}
+#typing {
+    white-space: pre-line;
+    color: #00ff00;
+}
 </style>
 </head>
 <body>
-
-<div class="header">
-    E-OFFICE
-</div>
-
-<div class="container">
-
-    <div class="sidebar">
-
-        <div class="menu-item">
-
-            <button class="menu-btn" onclick="toggleMenu()">
-                ▼ KEPEGAWAIAN
-            </button>
-
-            <div class="submenu" id="pegawaiMenu">
-
-                <a href="#">Mutasi</a>
-
-                <a href="#">Kenaikan Pangkat</a>
-
-            </div>
-
-        </div>
-
+<div class="overlay" id="infoBox">
+    <div class="overlay-box">
+        <h2 class="blink">INFORMASI</h2>
+        <p id="typing"></p>
+        <button id="okButton" onclick="tutupInfo()" style="display:none;">
+    OK
+</button>
     </div>
-
-    <div class="content">
-
-        <h2>Dashboard</h2>
-        <p>Silakan pilih menu di sebelah kiri.</p>
-
-    </div>
-
 </div>
-
+<header>
+    <h1 class="judul">RT001 RW004</h1>
+    <h1 class="subjudul">KELURAHAN PETIR KECAMATAN CIPONDOH</h1>
+</header>
+<main>
+    <div class="dropdown-box">
+        <h2>KARANG TARUNA</h2>
+        <select id="menuSelect" onchange="pilihMenu()">
+    <option value="">-- Pilih Menu --</option>
+    <option value="https://rt001-monitoring.github.io/database/strukturorganisasikarangtaruna.html">
+    STRUKTUR ORGANISASI
+    <option value="https://rt001-monitoring.github.io/database/databasekarangtaruna.html">
+    DAFTAR NAMA ANGGOTA
+    <option value="https://rt001-monitoring.github.io/database/dokumentasikarangtaruna.html">
+    DOKUMENTASI    
+</option>
+</select>
+    </div>
+    <div class="footer-section">
+        <hr>
+        <p>
+            © 2026 Karang Taruna, Petir, Cipondoh, Tangerang-Banten
+        </p>
+    </div>
+</main>
 <script>
+function pilihMenu() {
+    const menu = document.getElementById("menuSelect").value;
 
-function toggleMenu(){
-
-    const menu = document.getElementById("pegawaiMenu");
-
-    if(menu.style.display==="block"){
-        menu.style.display="none";
-    }else{
-        menu.style.display="block";
+    if (menu !== "") {
+        window.location.href = menu;
     }
+}
+</script>
+<script>
+function tutupInfo() {
+    document.getElementById("infoBox").style.display = "none";
+}
+</script>
+<script>
+const text = `Karang Taruna adalah organisasi kepemudaan nonpartisan di Indonesia yang dibentuk oleh masyarakat
+sebagai wadah pengembangan generasi muda. Organisasi ini tumbuh berdasarkan kesadaran dan tanggung jawab sosial dari, 
+oleh, dan untuk masyarakat, khususnya generasi muda di wilayah desa, kelurahan, atau komunitas sosial sederajat`;
+let index = 0;
 
+function ketik() {
+    if (index < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(ketik, 50);
+    } else {
+        document.getElementById("okButton").style.display = "inline-block";
+    }
 }
 
+ketik();
 </script>
-
 </body>
 </html>
